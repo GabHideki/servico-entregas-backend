@@ -1,0 +1,25 @@
+{
+  "name": "servico-entregas-backend",
+  "version": "1.0.0",
+  "description": "Sistema Back-End em Node.js e MongoDB para gerenciamento de um serviço de entregas. Aplica Programação Orientada a Objetos para manipular as entidades Cliente, Estabelecimento e Pedido. Implementa operações CRUD com o driver nativo, validação de campos obrigatórios, tratamento de exceções e registro de falhas em arquivo de log.",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GabHideki/servico-entregas-backend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/GabHideki/servico-entregas-backend/issues"
+  },
+  "homepage": "https://github.com/GabHideki/servico-entregas-backend#readme",
+  "dependencies": {
+    "mongodb": "^7.7.0"
+  }
+}
