@@ -12,11 +12,13 @@ class Logger {
 
         const tipo = error?.name || 'Error';
         const mensagem = error?.message || String(error);
+        const causa = error?.cause?.message;
         const registro = [
             `[${data}]`,
             `TIPO: ${tipo}`,
-            `ERRO: ${operacao}`,
+            `OPERAÇÃO: ${operacao}`,
             `MENSAGEM: ${mensagem}`,
+            ...(causa ? [`CAUSA: ${causa}`] : []),
             '----------------------------------------',
             ''
         ].join('\n');
@@ -25,7 +27,7 @@ class Logger {
             fs.mkdirSync(logDir, { recursive: true });
             fs.appendFileSync(logFile, registro, 'utf8');
         } catch (logError) {
-            console.error('Falha ao gravar arquivo de log:', logError);
+            console.error('Falha ao gravar arquivo de log:', logError.message);
         }
     }
 }

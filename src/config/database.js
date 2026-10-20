@@ -1,4 +1,3 @@
-
 const { MongoClient } = require('mongodb');
 const { Logger } = require('../utils/logger');
 
@@ -12,6 +11,8 @@ class Database {
     }
 
     async connect() {
+        if (this.db) return;
+
         try {
             await this.client.connect();
             this.db = this.client.db(dbName);
@@ -23,10 +24,16 @@ class Database {
     }
 
     async disconnect() {
+        const estavaConectado = Boolean(this.db);
+
         try {
+            // Também tenta liberar recursos se connect() falhar parcialmente.
             await this.client.close();
             this.db = null;
-            console.log('Desconectado do MongoDB');
+
+            if (estavaConectado) {
+                console.log('Desconectado do MongoDB');
+            }
         } catch (error) {
             Logger.error('Desconectar do MongoDB', error);
             throw error;
@@ -35,10 +42,11 @@ class Database {
 
     getCollection(collectionName) {
         if (!this.db) {
-            const error = new Error('Banco de dados não conectado');
+            const error = new Error('Banco de dados não conectado.');
             Logger.error('Obter coleção do MongoDB', error);
             throw error;
         }
+
         return this.db.collection(collectionName);
     }
 }

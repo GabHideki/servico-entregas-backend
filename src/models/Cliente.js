@@ -1,5 +1,5 @@
-class Cliente{
-    constructor(id = null, nome, telefone, email, endereco ){
+class Cliente {
+    constructor(id = null, nome, telefone, email, endereco) {
         this.id = id;
         this.nome = nome;
         this.telefone = telefone;
@@ -7,14 +7,23 @@ class Cliente{
         this.endereco = endereco;
     }
 
-    validar(){
-        if (!this.nome || this.nome.trim() === '' || typeof this.nome !== 'string') {
+    validar() {
+        if (typeof this.nome !== 'string' || this.nome.trim() === '') {
             throw new Error('Campo "nome" é obrigatório.');
         }
-        if (!this.email || !this.email.includes('@') || typeof this.email !== 'string') {
+
+        if (typeof this.telefone !== 'string' || this.telefone.trim() === '') {
+            throw new Error('Campo "telefone" é obrigatório.');
+        }
+
+        if (
+            typeof this.email !== 'string' ||
+            !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.email.trim())
+        ) {
             throw new Error('Campo "email" é obrigatório e deve ser válido.');
         }
-        if (!this.endereco || this.endereco.trim() === '' || typeof this.endereco !== 'string') {
+
+        if (typeof this.endereco !== 'string' || this.endereco.trim() === '') {
             throw new Error('Campo "endereco" é obrigatório.');
         }
     }
