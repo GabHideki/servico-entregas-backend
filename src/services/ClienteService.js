@@ -1,4 +1,3 @@
-const { ObjectId } = require('mongodb');
 const { Database } = require('../config/database');
 const { Cliente } = require('../models/Cliente');
 const { Logger } = require('../utils/logger');
