@@ -1,11 +1,9 @@
-const readline = require('readline/promises');
-const { stdin: input, stdout: output } = require('process');
 const { ClienteService } = require('../services/ClienteService');
 
 class ClienteView {
-    constructor() {
+    constructor(readlineInterface) {
         this.clienteService = new ClienteService();
-        this.rl = readline.createInterface({ input, output });
+        this.rl = readlineInterface;
     }
 
     async perguntar(mensagem) {
@@ -79,10 +77,6 @@ class ClienteView {
         } catch (error) {
             this.mostrarErro(error);
         }
-    }
-
-    fechar() {
-        this.rl.close();
     }
 }
 

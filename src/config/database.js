@@ -16,7 +16,6 @@ class Database {
         try {
             await this.client.connect();
             this.db = this.client.db(dbName);
-            console.log('Conectado ao MongoDB');
         } catch (error) {
             Logger.error('Conectar ao MongoDB', error);
             throw error;
@@ -27,13 +26,10 @@ class Database {
         const estavaConectado = Boolean(this.db);
 
         try {
-            // Também tenta liberar recursos se connect() falhar parcialmente.
             await this.client.close();
             this.db = null;
-
-            if (estavaConectado) {
-                console.log('Desconectado do MongoDB');
-            }
+            // Reinicia a instância do client para permitir novas conexões na mesma instância da classe
+            this.client = new MongoClient(uri);
         } catch (error) {
             Logger.error('Desconectar do MongoDB', error);
             throw error;

@@ -63,6 +63,21 @@ class ClienteService {
         });
     }
 
+    async obterClientePorId(id) {
+        if (typeof id !== 'string' || !/^[1-9]\d*$/.test(id)) {
+            const error = new Error('ID do cliente inválido.');
+            Logger.error('Obter cliente por ID', error);
+            throw error;
+        }
+        return this.executarOperacao('Obter cliente por ID', async (collection) => {
+            const cliente = await collection.findOne({ id: Number(id) });
+            if (!cliente) {
+                throw new Error('Cliente não encontrado.');
+            }
+            return cliente;
+        });
+    }
+
     async listarClientes() {
         return this.executarOperacao('Listar clientes', async (collection) => {
             return collection.find({}).toArray();

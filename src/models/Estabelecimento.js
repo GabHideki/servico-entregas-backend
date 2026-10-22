@@ -7,18 +7,21 @@ class Estabelecimento{
         this.endereco = endereco;
     }
 
-    validar(){
-        if (!this.nome || this.nome.trim() === '' || typeof this.nome !== 'string') {
+    validar() {
+        if (typeof this.nome !== 'string' || this.nome.trim() === '') {
             throw new Error('Campo "nome" é obrigatório.');
         }
-        if (!this.categoria || this.categoria.trim() === '' || typeof this.categoria !== 'string') {
+
+        if (typeof this.categoria !== 'string' || this.categoria.trim() === '') {
             throw new Error('Campo "categoria" é obrigatório.');
         }
-        if (!this.endereco || this.endereco.trim() === '' || typeof this.endereco !== 'string') {
-            throw new Error('Campo "endereco" é obrigatório.');
-        }
-        if(!this.telefone || this.telefone.trim() === '' || typeof this.telefone !== 'string') {
+
+        if (typeof this.telefone !== 'string' || this.telefone.trim() === '') {
             throw new Error('Campo "telefone" é obrigatório.');
+        }
+
+        if (typeof this.endereco !== 'string' || this.endereco.trim() === '') {
+            throw new Error('Campo "endereco" é obrigatório.');
         }
     }
 }
