@@ -1,7 +1,9 @@
+const { PrincipalView } = require('./view/PrincipalView');
 const { PrincipalMenu } = require('./menu/PrincipalMenu');
 
 async function main() {
-    await PrincipalMenu();
+    const principalView = new PrincipalView();
+    await PrincipalMenu(principalView);
 }
 
 main();

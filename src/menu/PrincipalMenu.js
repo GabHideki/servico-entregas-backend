@@ -1,10 +1,8 @@
-const { PrincipalView } = require('../view/PrincipalView');
 const { EstabelecimentoMenu } = require('./EstabelecimentoMenu');
 const { ClienteMenu } = require('./ClienteMenu');
 const { PedidoMenu } = require('./PedidoMenu');
 
-async function PrincipalMenu() {
-    const view = new PrincipalView();
+async function PrincipalMenu(principalView) {
     let executando = true;
 
     try {
@@ -15,17 +13,17 @@ async function PrincipalMenu() {
             console.log('3. Gerenciar Pedidos');
             console.log('0. Sair');
 
-            const opcao = (await view.perguntar('Escolha uma opção: ')).trim();
+            const opcao = (await principalView.perguntar('Escolha uma opção: ')).trim();
 
             switch (opcao) {
                 case '1':
-                    await EstabelecimentoMenu(view.rl);
+                    await EstabelecimentoMenu(principalView.rl);
                     break;
                 case '2':
-                    await ClienteMenu(view.rl);
+                    await ClienteMenu(principalView.rl);
                     break;
                 case '3':
-                    await PedidoMenu(view.rl);
+                    await PedidoMenu(principalView.rl);
                     break;
                 case '0':
                     executando = false;
@@ -38,7 +36,7 @@ async function PrincipalMenu() {
     } catch (error) {
         console.error('Erro inesperado:', error.message);
     } finally {
-        view.fechar();
+        principalView.fechar();
     }
 }
 
